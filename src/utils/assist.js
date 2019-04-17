@@ -32,7 +32,7 @@ const findComponentsUpward = (context, componentName) => {
 const findComponentDownward = (context, componentName) => {
   const childrens = context.$children;
   let children = null;
-
+  //深度优先遍历
   if (childrens.length) {
     for (const child of childrens) {
       const name = child.$options.name;
