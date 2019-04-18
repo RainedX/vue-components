@@ -5,6 +5,9 @@
                 <li>
                     <router-link to="/form" tag="p">具有数据校验功能的表单组件 —— Form</router-link>
                 </li>
+                <li>
+                    <router-link to="/checkbox" tag="p">组合多选框组件 —— Checkbox</router-link>
+                </li>
             </ul>
         </div>
         <hr>
