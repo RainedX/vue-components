@@ -50,15 +50,26 @@ const findComponentDownward = (context, componentName) => {
   return children;
 };
 
-// 由一个组件，向下找到最近的指定组件
+// 由一个组件，向下找到所有指定的组件
 const findComponentsDownward = (context, componentName) => {
-
+  context.$children.reduce((accumulator, currentValue) => {
+    if (currentValue.$options.name === componentName) {
+      accumulator.push(currentValue);
+    }
+    const foundChilds = findComponentsDownward(currentValue, componentName);
+    return accumulator.concat(foundChilds);
+  }, []);
 };
 
-// 由一个组件，向下找到最近的指定组件
-const findBrothersComponents = (context, componentName) => {
-
-};
+// 由一个组件，找到指定组件的兄弟组件
+function findBrothersComponents(context, componentName, exceptMe = true) {
+  let res = context.$parent.$children.filter(item => {
+    return item.$options.name === componentName;
+  });
+  let index = res.findIndex(item => item._uid === context._uid);
+  if (exceptMe) res.splice(index, 1);
+  return res;
+}
 
 export {
   findComponentUpward,
